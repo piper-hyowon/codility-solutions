@@ -35,3 +35,37 @@ func Solution(A []int) int {
 
 	return cnt
 }
+
+// Task Score 100% Correctness 100% Performance 100%
+package solution
+import "sort"
+
+func Solution(A []int) int {
+    n := len(A)
+    if n < 2 {
+        return 0
+    }
+    
+    starts, ends := make([]int, n), make([]int, n)
+    
+    for i, radius := range A {
+        starts[i], ends[i] = i-radius, i+radius
+    }
+    
+    sort.Ints(starts)
+    sort.Ints(ends)
+    
+    intersections := 0
+    for i, j := 0, 0; i < n; i++ {
+        // j를 적절한 위치로 이동
+        for ; j < n && ends[j] < starts[i]; j++ {
+            // 빈 body - j만 증가
+        }
+        
+        if intersections += i - j; intersections > 10_000_000 {
+            return -1
+        }
+    }
+    
+    return intersections
+}
