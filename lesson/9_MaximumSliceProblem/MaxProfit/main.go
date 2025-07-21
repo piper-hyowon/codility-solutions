@@ -1,4 +1,4 @@
-// Task Score 77% Correctness 100% Performance 50
+// Task Score 77% Correctness 100% Performance 50%
 
 package solution
 
@@ -48,4 +48,40 @@ func Solution(A []int) int {
 	}
 
 	return max
+}
+
+
+
+
+// Task Score 100% Correctness 100% Performance 100%
+package solution
+
+// 언제 사고 언제 팔아야 최대 이익?
+// 최대 이익 리턴, 최대 이익이 마이너스면 0 리턴
+func Solution(A []int) int {
+	if len(A) < 2 {
+		return 0
+	}
+
+	cheapest := A[0]
+    maxProfit := A[1] - A[0]
+    if A[1] > A[0] {
+        cheapest = A[1]
+    }
+	for _, v := range A {
+        // 최솟값 갱신
+        if v < cheapest {
+            cheapest = v
+        } else {
+            // 최대 이익 갱신
+            if v - cheapest > maxProfit {
+                maxProfit = v - cheapest
+            }
+        }
+    }
+
+    if maxProfit < 0 {
+        return 0
+    }
+    return maxProfit
 }
