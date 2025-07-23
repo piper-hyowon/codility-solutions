@@ -1,25 +1,24 @@
-// Task Score 62% Correctness 100% Performance 25%
-
+// Task Score 100% Correctness 100% Performance 100%
 package solution
 
-// 0 ~ N-1 초콜릿
-// 먹고나면 포장지만 남아
-// X 초콜릿 먹어 -> (X + M) modulo N 초콜릿먹어?
-// 빈 포장지 만날때까지 먹어.
+// M을 몇 번 더해야 N의 배수가 되는지
+// => 최소공배수 구하고 / M
+// LCM(10, 4) = 20
+// 0 4 8 12 16 20(0)
+// 20이 되어서 인덱스가 다시 0이 되면 안먹음
+// 그 전에 16까지 5번먹음! 20되려면 4를 5번 더해. 20/4가 필요
+// 최소공배수 = A X B / 최대공약수
 func Solution(N int, M int) int {
-	eaten := make(map[int]bool)
-	eaten[0] = true
-	i := M % N
-	for {
-		if eaten[i%N] {
-			return len(eaten)
-		}
-		eaten[i%N] = true
-		if len(eaten) >= N {
-			break
-		}
-		i += M
-	}
+	return lcm(N, M, gcd(N, M)) / M
+}
 
-	return len(eaten)
+func lcm(a, b, gcd int) int {
+	return a * b / gcd
+}
+
+func gcd(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
 }
